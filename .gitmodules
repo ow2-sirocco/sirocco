@@ -1,0 +1,16 @@
+[submodule "openstack-java-sdk"]
+	path = openstack-java-sdk
+	url = git@github.com:ow2-sirocco/openstack-java-sdk.git
+	branch = sirocco
+[submodule "cimi-web-module"]
+	path = cimi-web-module
+	url = git@github.com:ow2-sirocco/sirocco-cimi-api-server.git
+	branch = master
+[submodule "cloudmanager-business-module"]
+	path = cloudmanager-business-module
+	url = git@github.com:ow2-sirocco/sirocco-cloudmanager.git
+	branch = master
+[submodule "dashboard-web-module"]
+	path = dashboard-web-module
+	url = git@github.com:ow2-sirocco/sirocco-web-dashboard.git
+	branch = master

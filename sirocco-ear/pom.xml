@@ -1,0 +1,235 @@
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.ow2.sirocco.cloudmanager</groupId>
+        	<artifactId>sirocco-parent</artifactId>
+        	<version>0.6.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.ow2.sirocco.cloudmanager</groupId>
+	<artifactId>sirocco-cloudmanager-ear</artifactId>
+	<packaging>ear</packaging>
+	<name>SIROCCO :: CloudManager :: EAR</name>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-core-manager</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>ejb</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-model-cimi</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-connector-amazon</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>jar</type>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.inject</groupId>
+					<artifactId>javax.inject</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-connector-mock</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-connector-openstack-nova</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>jar</type>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.annotation</groupId>
+					<artifactId>javax.annotation-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.ws.rs</groupId>
+					<artifactId>javax.ws.rs-api</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.codehaus.jackson</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<!-- <exclusion> <groupId>org.glassfish.hk2</groupId> <artifactId>*</artifactId> 
+					</exclusion> -->
+				<exclusion>
+					<groupId>org.glassfish.jersey.core</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.glassfish.jersey.media</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-connector-vcd</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>jar</type>
+		</dependency>
+
+		
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-vaadin-dashboard</artifactId>
+			<version>${dashboard.version}</version>
+			<type>war</type>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.ow2.sirocco.cimi</groupId>
+			<artifactId>sirocco-cimi-api-server-webapp</artifactId>
+			<version>${cimi.server.version}</version>
+			<type>war</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.rabbitmq</groupId>
+			<artifactId>amqp-client</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.1</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<version>6</version>
+					<applicationName>sirocco</applicationName>
+					<generateApplicationXml>true</generateApplicationXml>
+					<defaultLibBundleDir>lib</defaultLibBundleDir>
+					<modules>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-model-cimi</artifactId>
+						</jarModule>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-connector-api</artifactId>
+						</jarModule>
+						<ejbModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-core-manager</artifactId>
+							<bundleFileName>core.jar</bundleFileName>
+						</ejbModule>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-connector-mock</artifactId>
+						</jarModule>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-connector-openstack-nova</artifactId>
+						</jarModule>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-connector-amazon</artifactId>
+						</jarModule>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-connector-vcd</artifactId>
+						</jarModule>
+						<webModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-vaadin-dashboard</artifactId>
+							<context-root>/dashboard</context-root>
+						</webModule>
+						<webModule>
+							<groupId>org.ow2.sirocco.cimi</groupId>
+							<artifactId>sirocco-cimi-api-server-webapp</artifactId>
+							<context-root>/cimi</context-root>
+						</webModule>
+						
+					</modules>
+					<archive>
+						<manifestEntries>
+							<Implementation-Version>${project.version}</Implementation-Version>
+						</manifestEntries>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<copy
+									todir="${project.build.directory}/${project.build.finalName}/lib"
+									overwrite="true">
+									<fileset dir="lib" />
+								</copy>
+							</tasks>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+	</build>
+
+
+</project>
