@@ -51,6 +51,7 @@
 	<modules>
 		<module>openstack-java-sdk</module>
 		<module>cimi-web-module</module>
+		<module>cimi-client</module>
 		<module>dashboard-web-module</module>
 		<module>cloudmanager-business-module</module>
 		<module>sirocco-ear</module>

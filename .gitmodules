@@ -14,3 +14,7 @@
 	path = dashboard-web-module
 	url = git@github.com:ow2-sirocco/sirocco-web-dashboard.git
 	branch = master
+[submodule "cimi-client"]
+	path = cimi-client
+	url = git@github.com:ow2-sirocco/sirocco-cimi-client.git
+	branch = master
