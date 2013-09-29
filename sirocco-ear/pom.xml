@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>org.ow2.sirocco.cloudmanager</groupId>
-	<artifactId>sirocco-cloudmanager-ear</artifactId>
+	<artifactId>sirocco</artifactId>
 	<packaging>ear</packaging>
 	<name>SIROCCO :: CloudManager :: EAR</name>
 
