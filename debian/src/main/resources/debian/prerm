@@ -1,0 +1,20 @@
+#!/bin/sh
+
+set -e
+
+. /usr/share/debconf/confmodule
+. /usr/share/dbconfig-common/dpkg/prerm
+dbc_go sirocco-server $@
+
+#DEBHELPER#
+
+asadmin stop-domain sirocco
+asadmin delete-domain sirocco
+
+if [ -d /usr/share/glassfish/lib/endorsed ]; then
+  for f in $(ls /usr/share/sirocco-server/lib/endorsed); do
+    rm /usr/share/glassfish/lib/endorsed/$f
+  done
+fi
+
+

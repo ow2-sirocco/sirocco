@@ -1,0 +1,3 @@
+usr/share/sirocco-server
+usr/share/dbconfig-common/data/sirocco-server/install
+usr/share/dbconfig-common/data/sirocco-server/upgrade/mysql

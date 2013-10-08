@@ -1,0 +1,12 @@
+Source: sirocco-server
+Section: misc
+Priority: optional
+Maintainer: Gregoire Lejeune <gregoire.lejeune@enovance.com>
+Build-Depends-Indep: debhelper (>> 3.0.0)
+Standards-Version: ${cloudmanager.version}-${deb.version}
+
+Package: sirocco-server
+Architecture: all
+Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (= 4.0-ocw0.0.1)
+Description: Sirocco broker server
+

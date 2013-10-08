@@ -1,0 +1,181 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.ow2.sirocco.cloudmanager</groupId>
+    <artifactId>sirocco-parent</artifactId>
+    <version>0.6.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>org.ow2.sirocco.cloudmanager</groupId>
+	<artifactId>sirocco-debian</artifactId>
+  <packaging>pom</packaging>
+	<name>SIROCCO :: CloudManager :: DEB</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>ear</type>
+		</dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.26</version>
+    </dependency>
+
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>1.0.13</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>1.0.13</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>jul-to-slf4j</artifactId>
+      <version>1.7.5</version>
+    </dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <version>2.8</version>
+        <executions>
+          <execution>
+            <id>copy-endorsed</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server/lib/endorsed</outputDirectory>
+              <includeArtifactIds>logback-classic,logback-core,slf4j-api,jul-to-slf4j</includeArtifactIds>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-domain</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server/lib/domain</outputDirectory>
+              <includeArtifactIds>mysql-connector-java</includeArtifactIds>
+            </configuration>
+          </execution>
+          <execution>
+            <id>copy-ear</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server/lib</outputDirectory>
+              <includeArtifactIds>sirocco</includeArtifactIds>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <id>copy-config</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server/config</outputDirectory>
+              <resources>          
+                <resource>
+                  <directory>${project.parent.basedir}/etc/glassfish_config</directory>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+          <execution>
+            <id>copy-debian-resources</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.build.directory}/sirocco-server</outputDirectory>
+              <resources>          
+                <resource>
+                  <directory>src/main/resources</directory>
+                  <filtering>true</filtering>
+                </resource>
+              </resources>              
+            </configuration>            
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-mysql-script</id>
+            <phase>install</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <copy file="${project.parent.basedir}/etc/db/sirocco_mock_db.sql" tofile="${project.build.directory}/sirocco-server/mysql.sql"/>
+                <chmod file="${project.build.directory}/sirocco-server/debian/rules" perm="ugo+rx"/>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <id>create-deb</id>
+            <phase>install</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>fakeroot</executable>
+              <arguments>
+                <argument>debian/rules</argument>
+                <argument>binary</argument>
+              </arguments>
+              <workingDirectory>${project.build.directory}/sirocco-server</workingDirectory>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+		</plugins>
+	</build>
+</project>
