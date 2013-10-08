@@ -45,6 +45,14 @@ On Debian or Ubuntu, you can use our packages :
     echo "deb http://lejeun.es/deb lenny main" > /etc/apt/sources.list.d/sirocco.list
     apt-get install sirocco-all
 
+## Create the debian package
+
+install `fakeroot`, `debhelper`, `dbconfig-common`, `debconf`
+
+    mvn clean install
+    cd debian
+    mvn clean install
+
 ## Installing Sirocco the hard way
 
 Prerequiste:
@@ -82,7 +90,6 @@ Then install MySQL JDBC connector
     cd /opt/glassfish4/glassfish/domains/domain1/lib/
 
     wget http://repo1.maven.org/maven2/mysql/mysql-connector-java/5.1.26/mysql-connector-java-5.1.26.jar
-
 
 ### Create and initialize Sirocco MySQL database
 

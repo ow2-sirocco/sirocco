@@ -1,25 +1,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<parent>
-		<groupId>org.ow2.sirocco.cloudmanager</groupId>
+  <parent>
+    <groupId>org.ow2.sirocco.cloudmanager</groupId>
     <artifactId>sirocco-parent</artifactId>
     <version>0.6.0-SNAPSHOT</version>
-	</parent>
+  </parent>
 
-	<groupId>org.ow2.sirocco.cloudmanager</groupId>
-	<artifactId>sirocco-debian</artifactId>
+  <groupId>org.ow2.sirocco.cloudmanager</groupId>
+  <artifactId>sirocco-debian</artifactId>
   <packaging>pom</packaging>
-	<name>SIROCCO :: CloudManager :: DEB</name>
+  <name>SIROCCO :: CloudManager :: DEB</name>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.ow2.sirocco.cloudmanager</groupId>
-			<artifactId>sirocco</artifactId>
-			<version>${cloudmanager.version}</version>
-			<type>ear</type>
-		</dependency>
+  <dependencies>
+    <dependency>
+      <groupId>org.ow2.sirocco.cloudmanager</groupId>
+      <artifactId>sirocco</artifactId>
+      <version>${cloudmanager.version}</version>
+      <type>ear</type>
+    </dependency>
 
     <dependency>
       <groupId>mysql</groupId>
@@ -32,28 +32,28 @@
       <artifactId>logback-classic</artifactId>
       <version>1.0.13</version>
     </dependency>
-    
+
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-core</artifactId>
       <version>1.0.13</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.5</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>jul-to-slf4j</artifactId>
       <version>1.7.5</version>
     </dependency>
-	</dependencies>
+  </dependencies>
 
-	<build>
-		<plugins>
+  <build>
+    <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
@@ -176,6 +176,6 @@
         </executions>
       </plugin>
 
-		</plugins>
-	</build>
+    </plugins>
+  </build>
 </project>
