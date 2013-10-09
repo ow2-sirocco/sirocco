@@ -7,6 +7,6 @@ Standards-Version: ${deb.version}
 
 Package: sirocco-server
 Architecture: all
-Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (= 4.0-ocw0.0.1)
+Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (= 4.0-1)
 Description: Sirocco broker server
 
