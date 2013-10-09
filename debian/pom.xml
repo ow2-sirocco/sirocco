@@ -109,7 +109,7 @@
               <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server/config</outputDirectory>
               <resources>          
                 <resource>
-                  <directory>${project.parent.basedir}/etc/glassfish_config</directory>
+                  <directory>src/main/resources/config</directory>
                 </resource>
               </resources>              
             </configuration>            
@@ -124,7 +124,7 @@
               <outputDirectory>${project.build.directory}/sirocco-server</outputDirectory>
               <resources>          
                 <resource>
-                  <directory>src/main/resources</directory>
+                  <directory>src/main/resources/package</directory>
                   <filtering>true</filtering>
                 </resource>
               </resources>              
