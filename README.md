@@ -51,7 +51,7 @@ On Debian or Ubuntu, you can use our packages :
 install `fakeroot`, `debhelper`, `dbconfig-common`, `debconf`
 
     mvn clean install
-    cd debian
+    cd debian-packaging
     mvn clean install
 
 ## Installing Sirocco the hard way
