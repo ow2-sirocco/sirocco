@@ -1,0 +1,15 @@
+#!/usr/bin/make -f
+# debian/rules for sirocco-server package, by
+# Grégoire Lejeune <gregoire.lejeune@enovance.com>
+
+# Uncomment this to turn on verbose mode.
+export DH_VERBOSE=1
+
+%:
+	dh $@
+
+override_dh_install:
+	dh_install
+	cp -r usr debian/sirocco-server
+	cp mysql.sql debian/sirocco-server/usr/share/dbconfig-common/data/sirocco-server/install/mysql
+

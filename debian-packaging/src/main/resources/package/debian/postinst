@@ -1,0 +1,46 @@
+#!/bin/sh -e
+
+set -e
+
+if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
+
+  . /usr/share/debconf/confmodule
+  . /usr/share/dbconfig-common/dpkg/postinst
+  dbc_go sirocco-server $@
+
+  #if [ -f /etc/dbconfig-common/sirocco-server.conf ]; then
+  #  . /etc/dbconfig-common/sirocco-server.conf
+  sed -i "s/#SIROCCO_DB_PASSWORD#/$dbc_dbpass/g" /usr/share/sirocco-server/config/domain.xml
+  #  env > /tmp/sirocco-server.log
+  #fi
+
+  if [ -d /usr/share/glassfish/lib/endorsed ]; then
+    for f in $(ls /usr/share/sirocco-server/lib/endorsed); do
+      [ -f /usr/share/glassfish/lib/endorsed/$f ] || ln /usr/share/sirocco-server/lib/endorsed/$f /usr/share/glassfish/lib/endorsed/$f
+    done
+  fi
+
+  asadmin create-domain --nopassword=true sirocco
+
+  if [ -f /usr/share/glassfish/domains/sirocco/config/domain.xml ]; then
+    rm /usr/share/glassfish/domains/sirocco/config/domain.xml
+  fi
+
+  if [ -d /usr/share/glassfish/domains/sirocco/lib ]; then
+    for f in $(ls /usr/share/sirocco-server/lib/domain); do
+      ln /usr/share/sirocco-server/lib/domain/$f /usr/share/glassfish/domains/sirocco/lib/$f
+    done
+  fi
+
+  if [ -d /usr/share/glassfish/domains/sirocco/config ]; then
+    for f in $(ls /usr/share/sirocco-server/config); do 
+      ln -s /usr/share/sirocco-server/config/$f /usr/share/glassfish/domains/sirocco/config/$f
+    done
+  fi
+
+  asadmin start-domain sirocco
+  asadmin deploy /usr/share/sirocco-server/lib/sirocco-${cloudmanager.version}.ear
+
+fi
+
+#DEBHELPER#

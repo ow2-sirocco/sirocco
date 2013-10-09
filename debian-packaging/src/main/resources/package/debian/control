@@ -2,8 +2,8 @@ Source: sirocco-server
 Section: misc
 Priority: optional
 Maintainer: Gregoire Lejeune <gregoire.lejeune@enovance.com>
-Build-Depends-Indep: debhelper (>> 3.0.0)
-Standards-Version: ${cloudmanager.version}-${deb.version}
+Build-Depends: debhelper (>= 9)
+Standards-Version: ${deb.version}
 
 Package: sirocco-server
 Architecture: all

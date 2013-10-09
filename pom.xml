@@ -45,7 +45,7 @@
 		<cloudmanager.version>0.6.0-SNAPSHOT</cloudmanager.version>
 		<dashboard.version>0.5.0-SNAPSHOT</dashboard.version>
 		<cimi.server.version>0.6.4-SNAPSHOT</cimi.server.version>
-    <deb.version>ocw0.0.1</deb.version>
+    <deb.version>0.6.0+SNAPSHOT-1</deb.version>
 	</properties>
 
 
