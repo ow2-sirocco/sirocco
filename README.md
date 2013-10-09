@@ -42,8 +42,9 @@ The output of the compilation consists of
 On Debian or Ubuntu, you can use our packages :
 
     wget -O - http://lejeun.es/deb/sirocco.gpg.key | sudo apt-key add -
-    echo "deb http://lejeun.es/deb lenny main" > /etc/apt/sources.list.d/sirocco.list
-    apt-get install sirocco-all
+    echo "deb http://lejeun.es/deb ocw main" > /etc/apt/sources.list.d/sirocco.list
+    apt-get update
+    apt-get install sirocco-server
 
 ## Create the debian package
 
