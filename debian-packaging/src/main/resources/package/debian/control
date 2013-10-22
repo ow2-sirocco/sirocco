@@ -9,4 +9,14 @@ Package: sirocco-server
 Architecture: all
 Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (>= 4.0)
 Description: Sirocco broker server
+ Sirocco is a multicloud broker written in Java
+ It allow you to access several IaaS like OpenStack, Amazon EC2, VMWare or 
+ CloudSatck.
+ .
+ The public Sirocco API is based on CIMI (http://dmtf.org/standards/cloud)
+ with many extensions. There is also an internal API that's allow you to easily
+ add new IaaS support. 
+ .
+ Sirocco comes with a Dashboard, so you can manage all your IaaS in the same 
+ place.
 

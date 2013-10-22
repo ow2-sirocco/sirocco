@@ -6,6 +6,7 @@ if [ "${1}" = "purge" ] ; then
 
   if [ -f /usr/share/debconf/confmodule ]; then
     . /usr/share/debconf/confmodule
+    db_purge
   fi
   if [ -f /usr/share/dbconfig-common/dpkg/postrm ]; then
     . /usr/share/dbconfig-common/dpkg/postrm
