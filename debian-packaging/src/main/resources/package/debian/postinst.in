@@ -1,0 +1,78 @@
+#!/bin/sh -e
+
+set -e
+
+#PARSE-XML-INCLUDE#
+
+do_xml() {
+  if [ $MYSQL_POOL = false ] && [ "$XML_TAG_NAME" = "jdbc-connection-pool" ] ; then
+    local POOL_NAME=$(get_attribute_value "name")
+    if [ "$POOL_NAME" = "MySQLConnPool" ] ; then
+      MYSQL_POOL=true
+    fi
+  fi
+  if [ $MYSQL_POOL = true ] ; then
+    if [ "$XML_TAG_NAME" = "/jdbc-connection-pool" ] ; then
+      MYSQL_POOL=false
+    fi
+    if [ "$XML_TAG_NAME" = "property" ] ; then
+      local PROPERTY_NAME=$(get_attribute_value "name")
+      if [ "$PROPERTY_NAME" = "User" ] ; then
+        set_attribute_value "value" "$dbc_dbuser"
+      elif [ "$PROPERTY_NAME" = "Password" ] ; then
+        set_attribute_value "value" "$dbc_dbpass"
+      elif [ "$PROPERTY_NAME" = "DatabaseName" ] ; then
+        set_attribute_value "value" "$dbc_dbname"
+      fi
+    fi
+  fi
+  print_entity >>$TEMP_DOMAIN_FILE
+}
+
+if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
+
+  . /usr/share/debconf/confmodule
+  . /usr/share/dbconfig-common/dpkg/postinst
+  dbc_go sirocco-server $@
+
+  if [ "$bdc_dbname" != "" ] ; then
+    MYSQL_POOL=false
+    TEMP_DOMAIN_FILE=$(mktemp -t domain_xml.XXXXXX)
+    parse_xml "do_xml" /etc/sirocco-server/domain.xml
+    mv $TEMP_DOMAIN_FILE /etc/sirocco-server/domain.xml
+
+    if [ -d /var/glassfish/domains/sirocco ] ; then
+      asadmin restart-domain sirocco
+    else
+      if [ -d /usr/share/glassfish/lib/endorsed ]; then
+        for f in $(ls /usr/share/sirocco-server/lib/endorsed); do
+          [ -f /usr/share/glassfish/lib/endorsed/$f ] || ln /usr/share/sirocco-server/lib/endorsed/$f /usr/share/glassfish/lib/endorsed/$f
+        done
+      fi
+
+      asadmin create-domain --nopassword=true sirocco
+
+      if [ -f /var/glassfish/domains/sirocco/config/domain.xml ]; then
+        rm /var/glassfish/domains/sirocco/config/domain.xml
+      fi
+
+      if [ -d /var/glassfish/domains/sirocco/lib ]; then
+        for f in $(ls /usr/share/sirocco-server/lib/domain); do
+          ln /usr/share/sirocco-server/lib/domain/$f /var/glassfish/domains/sirocco/lib/$f
+        done
+      fi
+
+      if [ -d /var/glassfish/domains/sirocco/config ]; then
+        for f in $(ls /etc/sirocco-server); do 
+          ln -s /etc/sirocco-server/$f /var/glassfish/domains/sirocco/config/$f
+        done
+      fi
+
+      asadmin start-domain sirocco
+      asadmin deploy /usr/share/sirocco-server/lib/sirocco-${cloudmanager.version}.ear
+    fi
+  fi
+
+fi
+
+#DEBHELPER#

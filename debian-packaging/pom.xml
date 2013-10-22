@@ -106,7 +106,7 @@
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server/config</outputDirectory>
+              <outputDirectory>${project.build.directory}/sirocco-server/etc/sirocco-server</outputDirectory>
               <resources>          
                 <resource>
                   <directory>src/main/resources/config</directory>
@@ -147,6 +147,7 @@
               <tasks>
                 <copy file="${project.parent.basedir}/etc/db/sirocco_mock_db.sql" tofile="${project.build.directory}/sirocco-server/mysql.sql"/>
                 <chmod file="${project.build.directory}/sirocco-server/debian/rules" perm="ugo+rx"/>
+                <chmod file="${project.build.directory}/sirocco-server/insert_include" perm="ugo+rx"/>
               </tasks>
             </configuration>
           </execution>

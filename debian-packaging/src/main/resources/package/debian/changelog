@@ -1,5 +1,5 @@
-sirocco-server (0.6.0+SNAPSHOT-1) UNRELEASED; urgency=low
+sirocco-server (0.6.0+SNAPSHOT-1) unstable; urgency=low
 
-  * Initial release.
+  * Initial release. (Closes: #0)
 
- -- Grégoire Lejeune <gregoire.lejeune@enovance.com>  Mar 8 oct 2013 10:36:48 CEST 
+ -- Grégoire Lejeune <gregoire.lejeune@enovance.com>  Thu, 10 Oct 2013 15:38:48 +0200

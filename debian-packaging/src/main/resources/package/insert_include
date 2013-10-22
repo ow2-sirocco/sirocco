@@ -1,0 +1,16 @@
+#!/bin/sh
+
+curr_dir=$(pwd)
+dir=$(dirname $0)
+FILE_PATH=$(cd  $dir;pwd)
+
+INC_MARK="#${1}#"
+INC=${FILE_PATH}/${2}
+DST=debian/${3}
+SRC=debian/${3}.in
+
+awk '{if ($1 == I) {
+print "### Start of included " G " library"
+while ((getline line < F) > 0) print line
+print "### End of included " G " library"
+} else print}' F=${INC} G=$(basename $INC) I=${INC_MARK} ${SRC} > ${DST}

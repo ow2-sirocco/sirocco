@@ -3,10 +3,10 @@ Section: misc
 Priority: optional
 Maintainer: Gregoire Lejeune <gregoire.lejeune@enovance.com>
 Build-Depends: debhelper (>= 9)
-Standards-Version: ${deb.version}
+Standards-Version: 3.9.4
 
 Package: sirocco-server
 Architecture: all
-Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (= 4.0-1)
+Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (>= 4.0)
 Description: Sirocco broker server
 

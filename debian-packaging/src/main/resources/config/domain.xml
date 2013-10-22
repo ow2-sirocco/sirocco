@@ -45,11 +45,11 @@
       <property name="connectionAttributes" value=";create=true"></property>
     </jdbc-connection-pool>
     <jdbc-connection-pool driver-classname="" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" res-type="javax.sql.DataSource" description="" name="MySQLConnPool">
-      <property name="User" value="sirocco"></property>
+      <property name="User" value="sirocco_db_username"></property>
       <property name="ServerName" value="localhost"></property>
       <property name="Port" value="3306"></property>
-      <property name="DatabaseName" value="sirocco"></property>
-      <property name="Password" value="#SIROCCO_DB_PASSWORD#"></property>
+      <property name="DatabaseName" value="sirocco_db_name"></property>
+      <property name="Password" value="sirocco_db_password"></property>
     </jdbc-connection-pool>
     <jdbc-resource pool-name="MySQLConnPool" description="" jndi-name="jdbc/MySQLDataSource"></jdbc-resource>
     <jdbc-connection-pool driver-classname="" datasource-classname="org.h2.jdbcx.JdbcDataSource" res-type="javax.sql.DataSource" description="" name="H2InMemory">
