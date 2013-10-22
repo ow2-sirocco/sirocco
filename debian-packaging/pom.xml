@@ -145,7 +145,7 @@
             </goals>
             <configuration>
               <tasks>
-                <copy file="${project.parent.basedir}/etc/db/sirocco_mock_db.sql" tofile="${project.build.directory}/sirocco-server/mysql.sql"/>
+                <copy file="${project.parent.basedir}/etc/db/sirocco_db.sql" tofile="${project.build.directory}/sirocco-server/mysql.sql"/>
                 <chmod file="${project.build.directory}/sirocco-server/debian/rules" perm="ugo+rx"/>
                 <chmod file="${project.build.directory}/sirocco-server/insert_include" perm="ugo+rx"/>
               </tasks>
