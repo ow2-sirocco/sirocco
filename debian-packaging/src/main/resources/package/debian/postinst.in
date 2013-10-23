@@ -2,6 +2,12 @@
 
 set -e
 
+if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
+  . /usr/share/debconf/confmodule
+  . /usr/share/dbconfig-common/dpkg/postinst
+  dbc_go sirocco-server $@
+fi
+
 #PARSE-XML-INCLUDE#
 
 do_xml() {
@@ -14,8 +20,7 @@ do_xml() {
   if [ $MYSQL_POOL = true ] ; then
     if [ "$XML_TAG_NAME" = "/jdbc-connection-pool" ] ; then
       MYSQL_POOL=false
-    fi
-    if [ "$XML_TAG_NAME" = "property" ] ; then
+    elif [ "$XML_TAG_NAME" = "property" ] ; then
       local PROPERTY_NAME=$(get_attribute_value "name")
       if [ "$PROPERTY_NAME" = "User" ] ; then
         set_attribute_value "value" "$dbc_dbuser"
@@ -29,12 +34,8 @@ do_xml() {
   print_entity >>$TEMP_DOMAIN_FILE
 }
 
+echo "in postinst ${1}..."
 if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
-
-  . /usr/share/debconf/confmodule
-  . /usr/share/dbconfig-common/dpkg/postinst
-  dbc_go sirocco-server $@
-
   if [ "$bdc_dbname" != "" ] ; then
     MYSQL_POOL=false
     TEMP_DOMAIN_FILE=$(mktemp -t domain_xml.XXXXXX)

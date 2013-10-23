@@ -2,6 +2,8 @@
 
 set -e
 
+. /usr/share/debconf/confmodule
+
 #PARSE-XML-INCLUDE#
 
 do_xml() {
@@ -28,15 +30,13 @@ do_xml() {
   fi
 }
 
-. /usr/share/debconf/confmodule
-
 if [ -f /usr/share/dbconfig-common/dpkg/config ]; then
-  if [-f /var/glassfish/domains/sirocco/config/domain.xml ]; then
+  if [ -f /var/glassfish/domains/sirocco/config/domain.xml ]; then
     MYSQL_POOL=false
     parse_xml "do_xml" /etc/sirocco-server/domain.xml
-  #else
-  #  dbc_dbname="sirocco"
-  #  dbc_dbuser="sirocco"
+  else
+    dbc_dbname="sirocco"
+    dbc_dbuser="sirocco"
   fi
   dbc_dbtypes="mysql"
   dbc_authmethod_user="password"
