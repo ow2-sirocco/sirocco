@@ -6,6 +6,11 @@ if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
   . /usr/share/debconf/confmodule
   . /usr/share/dbconfig-common/dpkg/postinst
   dbc_go sirocco-server $@
+
+  DB_CONFIGURED=false
+  if [ "$dbc_dbname" != "" ] && [ "$dbc_dbpass" != "" ] && [ "$dbc_dbuser" != "" ]  ; then
+    DB_CONFIGURED=true
+  fi
 fi
 
 #PARSE-XML-INCLUDE#
@@ -34,13 +39,13 @@ do_xml() {
   print_entity >>$TEMP_DOMAIN_FILE
 }
 
-echo "in postinst ${1}..."
 if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
-  if [ "$bdc_dbname" != "" ] ; then
+  if [ $DB_CONFIGURED ] ; then
     MYSQL_POOL=false
     TEMP_DOMAIN_FILE=$(mktemp -t domain_xml.XXXXXX)
     parse_xml "do_xml" /etc/sirocco-server/domain.xml
     mv $TEMP_DOMAIN_FILE /etc/sirocco-server/domain.xml
+    chmod 644 /etc/sirocco-server/domain.xml
 
     if [ -d /var/glassfish/domains/sirocco ] ; then
       asadmin restart-domain sirocco
