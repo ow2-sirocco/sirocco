@@ -41,6 +41,15 @@ do_xml() {
 
 if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
   if [ $DB_CONFIGURED ] ; then
+    if ! [ -d /etc/sirocco-server ] ; then 
+      mkdir /etc/sirocco-server
+    fi
+    for f in domain.xml _logging.properties logback.xml ; do
+      if ! [ -e /etc/sirocco-server/$f ] ; then
+        cp /usr/share/sirocco-server/$f /etc/sirocco-server/$f
+      fi
+    done
+
     MYSQL_POOL=false
     TEMP_DOMAIN_FILE=$(mktemp -t domain_xml.XXXXXX)
     parse_xml "do_xml" /etc/sirocco-server/domain.xml
@@ -69,7 +78,7 @@ if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
       fi
 
       if [ -d /var/glassfish/domains/sirocco/config ]; then
-        for f in $(ls /etc/sirocco-server); do 
+        for f in domain.xml _logging.properties logback.xml ; do 
           ln -s /etc/sirocco-server/$f /var/glassfish/domains/sirocco/config/$f
         done
       fi
