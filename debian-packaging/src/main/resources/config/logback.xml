@@ -4,7 +4,7 @@
   <file>/tmp/sirocco.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
       <!-- daily rollover -->
-      <fileNamePattern>/tmp/sirocco.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <fileNamePattern>/var/log/sirocco.%d{yyyy-MM-dd}.log</fileNamePattern>
 
       <!-- keep 30 days' worth of history -->
       <maxHistory>30</maxHistory>
