@@ -57,6 +57,15 @@
 		<module>cloudmanager-business-module</module>
 		<module>sirocco-ear</module>
 	</modules>
+	
+	<profiles>
+		<profile>
+			<id>packaging</id>
+			<modules>
+				<module>debian-packaging</module>
+			</modules>
+		</profile>
+	</profiles>
 
 	<scm>
 		<connection>scm:git:git://github.com/ow2-sirocco/sirocco.git</connection>
