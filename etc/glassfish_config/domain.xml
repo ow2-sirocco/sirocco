@@ -248,8 +248,6 @@
         <jvm-options>-XX:NewRatio=2</jvm-options>
         <jvm-options>-Djava.net.preferIPv4Stack=true</jvm-options>
         <jvm-options>-Djava.rmi.server.hostname=localhost</jvm-options>
-        <jvm-options>-Dhttp.proxyHost=p-goodway</jvm-options>
-        <jvm-options>-Dhttp.proxyPort=3128</jvm-options>
         <jvm-options>-Djava.util.logging.config.file=${com.sun.aas.instanceRoot}/config/_logging.properties</jvm-options>
         <jvm-options>-Dlogback.configurationFile=file:///${com.sun.aas.instanceRoot}/config/logback.xml</jvm-options>
       </java-config>
@@ -431,8 +429,6 @@
         <jvm-options>-Dfelix.fileinstall.disableConfigSave=false</jvm-options>
         <jvm-options>-Djava.net.preferIPv4Stack=true</jvm-options>
         <jvm-options>-Djava.rmi.server.hostname=localhost</jvm-options>
-        <jvm-options>-Dhttp.proxyHost=p-goodway</jvm-options>
-        <jvm-options>-Dhttp.proxyPort=3128</jvm-options>
         <jvm-options>-Djava.util.logging.config.file=${com.sun.aas.instanceRoot}/config/_logging.properties</jvm-options>
         <jvm-options>-Dlogback.configurationFile=file:///${com.sun.aas.instanceRoot}/config/logback.xml</jvm-options>
       </java-config>
