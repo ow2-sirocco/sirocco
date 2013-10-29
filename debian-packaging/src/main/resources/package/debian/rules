@@ -11,10 +11,10 @@ export DH_VERBOSE=1
 override_dh_install:
 	dh_install
 	cp -r usr debian/sirocco-server
-	cp -r etc debian/sirocco-server
-	cp mysql.sql debian/sirocco-server/usr/share/dbconfig-common/data/sirocco-server/install/mysql
+	install -D -m 0664 mysql.sql debian/sirocco-server/usr/share/dbconfig-common/data/sirocco-server/install/mysql
 
 override_dh_auto_build:
 	dh_auto_build
-	./insert_include PARSE-XML-INCLUDE xml_parser postinst
-	./insert_include PARSE-XML-INCLUDE xml_parser config
+	chmod +x debian/insert_include
+	./debian/insert_include PARSE-XML-INCLUDE xml_parser postinst
+	./debian/insert_include PARSE-XML-INCLUDE xml_parser config
