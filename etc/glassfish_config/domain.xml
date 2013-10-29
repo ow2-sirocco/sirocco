@@ -71,6 +71,12 @@
     <connector-resource pool-name="jms/QueueConnectionFactory" jndi-name="jms/QueueConnectionFactory"></connector-resource>
     <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/TopicConnectionFactory" resource-adapter-name="jmsra" connection-definition-name="javax.jms.TopicConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/TopicConnectionFactory" jndi-name="jms/TopicConnectionFactory"></connector-resource>
+    <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="jms/ResourceStateChangeTopic">
+      <property name="Name" value="PhysicalResourceStateChangeTopic"></property>
+    </admin-object-resource>
+    <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Queue" jndi-name="jms/RequestQueue">
+      <property name="Name" value="PhysicalRequestQueue"></property>
+    </admin-object-resource>
   </resources>
   <servers>
     <server name="server" config-ref="server-config">
@@ -84,6 +90,8 @@
       <resource-ref ref="jms/QueueConnectionFactory"></resource-ref>
       <resource-ref ref="jms/TopicConnectionFactory"></resource-ref>
       <resource-ref ref="jdbc/H2InMemory"></resource-ref>
+      <resource-ref ref="jms/ResourceStateChangeTopic"></resource-ref>
+      <resource-ref ref="jms/RequestQueue"></resource-ref>
     </server>
   </servers>
   <nodes>
@@ -91,6 +99,8 @@
   </nodes>
   <configs>
     <config name="server-config">
+      <resource-ref ref="jms/RequestQueue"></resource-ref>
+      <resource-ref ref="jms/ResourceStateChangeTopic"></resource-ref>
       <system-property description="Port Number that JMS Service will listen for remote clients connection." name="JMS_PROVIDER_PORT" value="7676"></system-property>
       <http-service>
         <access-log></access-log>

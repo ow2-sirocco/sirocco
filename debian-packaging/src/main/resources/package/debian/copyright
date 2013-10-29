@@ -3,7 +3,7 @@ Upstream-Name: sirocco-server
 Source: https://github.com/ow2-sirocco/sirocco
 
 Files: *
-Copyright: Copyright 2013 France Telecom <sirocco@ow2.org>
+Copyright: Copyright 2013 Orange <sirocco@ow2.org>
 License: LGPL-2.1
 
 Files: debian/*
