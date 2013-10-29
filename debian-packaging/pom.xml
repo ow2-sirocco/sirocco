@@ -100,21 +100,6 @@
         <version>2.6</version>
         <executions>
           <execution>
-            <id>copy-config</id>
-            <phase>install</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.build.directory}/sirocco-server/usr/share/sirocco-server</outputDirectory>
-              <resources>          
-                <resource>
-                  <directory>src/main/resources/config</directory>
-                </resource>
-              </resources>              
-            </configuration>            
-          </execution>
-          <execution>
             <id>copy-debian-resources</id>
             <phase>install</phase>
             <goals>
@@ -138,13 +123,18 @@
         <artifactId>maven-antrun-plugin</artifactId>
         <executions>
           <execution>
-            <id>copy-mysql-script</id>
+            <id>copy-etc</id>
             <phase>install</phase>
             <goals>
               <goal>run</goal>
             </goals>
             <configuration>
               <tasks>
+                <copy toDir="${project.build.directory}/sirocco-server/usr/share/sirocco-server">
+                  <fileset dir="${project.parent.basedir}/etc/glassfish_config">
+                    <include name="*"/>
+                  </fileset>
+                </copy>
                 <copy file="${project.parent.basedir}/etc/db/sirocco_db.sql" tofile="${project.build.directory}/sirocco-server/mysql.sql"/>
                 <chmod file="${project.build.directory}/sirocco-server/debian/rules" perm="ugo+rx"/>
                 <chmod file="${project.build.directory}/sirocco-server/insert_include" perm="ugo+rx"/>

@@ -7,7 +7,7 @@ Standards-Version: 3.9.4
 
 Package: sirocco-server
 Architecture: all
-Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (>= 4.0)
+Depends: dbconfig-common, openjdk-7-jdk, mysql-server, glassfish-4 (>= 4.0), glassfish-4-javadb (>= 10.9.1.0), glassfish-4-mq (>= 4.0)
 Description: Sirocco broker server
  Sirocco is a multicloud broker written in Java
  It allow you to access several IaaS like OpenStack, Amazon EC2, VMWare or 
