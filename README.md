@@ -5,6 +5,7 @@ This is Sirocco git superproject. A complete Sirocco release can be compiled fro
 To clone this repository, execute:
 
     git clone --recursive git@github.com:ow2-sirocco/sirocco.git
+    git submodule update --remote
 
 (prerequisite: a GitHub account with a SSH key)
 
