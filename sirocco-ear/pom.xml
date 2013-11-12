@@ -45,6 +45,19 @@
 
 		<dependency>
 			<groupId>org.ow2.sirocco.cloudmanager</groupId>
+			<artifactId>sirocco-cloudmanager-connector-cloudstack</artifactId>
+			<version>${cloudmanager.version}</version>
+			<type>jar</type>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.inject</groupId>
+					<artifactId>javax.inject</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ow2.sirocco.cloudmanager</groupId>
 			<artifactId>sirocco-cloudmanager-connector-mock</artifactId>
 			<version>${cloudmanager.version}</version>
 			<type>jar</type>
@@ -175,6 +188,10 @@
 						<jarModule>
 							<groupId>org.ow2.sirocco.cloudmanager</groupId>
 							<artifactId>sirocco-cloudmanager-connector-amazon</artifactId>
+						</jarModule>
+						<jarModule>
+							<groupId>org.ow2.sirocco.cloudmanager</groupId>
+							<artifactId>sirocco-cloudmanager-connector-cloudstack</artifactId>
 						</jarModule>
 						<jarModule>
 							<groupId>org.ow2.sirocco.cloudmanager</groupId>
