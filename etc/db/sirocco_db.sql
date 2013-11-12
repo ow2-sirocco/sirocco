@@ -320,6 +320,7 @@ CREATE TABLE `CLOUDPROVIDER` (
   `CLOUDPROVIDERTYPE` varchar(255) DEFAULT NULL,
   `CREATED` datetime DEFAULT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `ENABLED` tinyint(1) DEFAULT '0',
   `ENDPOINT` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -331,7 +332,7 @@ CREATE TABLE `CLOUDPROVIDER` (
 
 LOCK TABLES `CLOUDPROVIDER` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDER` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDER` VALUES (7,'mock','2013-10-22 19:57:51','Mock cloud provider','dummy'),(9,'amazon','2013-10-22 19:57:52','Amazon EC2 Service','');
+INSERT INTO `CLOUDPROVIDER` VALUES (9,'mock','2013-11-12 20:04:56','Mock cloud provider',1,'dummy'),(11,'amazon','2013-11-12 20:04:58','Amazon EC2 Service',1,'');
 /*!40000 ALTER TABLE `CLOUDPROVIDER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -345,7 +346,10 @@ DROP TABLE IF EXISTS `CLOUDPROVIDERACCOUNT`;
 CREATE TABLE `CLOUDPROVIDERACCOUNT` (
   `ID` int(11) NOT NULL,
   `CREATED` datetime DEFAULT NULL,
+  `DESCRIPTION` varchar(255) DEFAULT NULL,
+  `ENABLED` tinyint(1) DEFAULT '0',
   `LOGIN` varchar(255) DEFAULT NULL,
+  `NAME` varchar(255) DEFAULT NULL,
   `PASSWORD` varchar(255) DEFAULT NULL,
   `CLOUDPROVIDER_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -398,18 +402,13 @@ DROP TABLE IF EXISTS `CLOUDPROVIDERLOCATION`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `CLOUDPROVIDERLOCATION` (
   `ID` int(11) NOT NULL,
-  `gps_altitude` double DEFAULT NULL,
-  `gps_latitude` double DEFAULT NULL,
-  `gps_longitude` double DEFAULT NULL,
   `CITYNAME` varchar(255) DEFAULT NULL,
   `COUNTRYNAME` varchar(255) DEFAULT NULL,
   `iso3166_1` varchar(255) DEFAULT NULL,
   `iso3166_2` varchar(255) DEFAULT NULL,
-  `postal_code` varchar(255) DEFAULT NULL,
+  `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATENAME` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE KEY `UNQ_CLOUDPROVIDERLOCATION_0` (`iso3166_1`,`iso3166_2`,`postal_code`),
-  UNIQUE KEY `UNQ_CLOUDPROVIDERLOCATION_1` (`gps_latitude`,`gps_longitude`,`gps_altitude`)
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -419,7 +418,7 @@ CREATE TABLE `CLOUDPROVIDERLOCATION` (
 
 LOCK TABLES `CLOUDPROVIDERLOCATION` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERLOCATION` VALUES (8,NULL,NULL,NULL,NULL,'France','FR','FR-75',NULL,'Paris'),(10,NULL,NULL,NULL,NULL,'USA','US','US-CA',NULL,'California'),(11,NULL,NULL,NULL,NULL,'Ireland','IE',NULL,NULL,NULL),(12,NULL,NULL,NULL,NULL,'USA','US','US-VA',NULL,'Virginia'),(13,NULL,NULL,NULL,NULL,'Singapore','SG',NULL,NULL,NULL),(14,NULL,NULL,NULL,NULL,'Japan','JP','JP-13',NULL,'Tokyo'),(15,NULL,NULL,NULL,NULL,'Brazil','BR','BR-SP',NULL,'Sao Paulo'),(16,NULL,NULL,NULL,NULL,'Australia','AU','AU-NSW',NULL,'Sydney'),(17,NULL,NULL,NULL,NULL,'USA','US','US-OR',NULL,'Oregon');
+INSERT INTO `CLOUDPROVIDERLOCATION` VALUES (10,NULL,'France','FR','FR-75',NULL,'Paris'),(12,NULL,'USA','US','US-CA',NULL,'California'),(13,NULL,'Ireland','IE',NULL,NULL,NULL),(14,NULL,'USA','US','US-VA',NULL,'Virginia'),(15,NULL,'Singapore','SG',NULL,NULL,NULL),(16,NULL,'Japan','JP','JP-13',NULL,'Tokyo'),(17,NULL,'Brazil','BR','BR-SP',NULL,'Sao Paulo'),(18,NULL,'Australia','AU','AU-NSW',NULL,'Sydney'),(19,NULL,'USA','US','US-OR',NULL,'Oregon');
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -446,7 +445,7 @@ CREATE TABLE `CLOUDPROVIDERLOCATION_CLOUDPROVIDER` (
 
 LOCK TABLES `CLOUDPROVIDERLOCATION_CLOUDPROVIDER` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION_CLOUDPROVIDER` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERLOCATION_CLOUDPROVIDER` VALUES (7,8),(9,10),(9,11),(9,12),(9,13),(9,14),(9,15),(9,16),(9,17);
+INSERT INTO `CLOUDPROVIDERLOCATION_CLOUDPROVIDER` VALUES (9,10),(11,12),(11,13),(11,14),(11,15),(11,16),(11,17),(11,18),(11,19);
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION_CLOUDPROVIDER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -472,7 +471,7 @@ CREATE TABLE `CLOUDPROVIDERPROFILE` (
 
 LOCK TABLES `CLOUDPROVIDERPROFILE` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERPROFILE` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERPROFILE` VALUES (3,'org.ow2.sirocco.cloudmanager.connector.mock.MockCloudProviderConnector','Mock provider','mock'),(4,'org.ow2.sirocco.cloudmanager.connector.openstack.OpenStackCloudProviderConnector','OpenStack (Grizzly or higher version required)','openstack'),(5,'org.ow2.sirocco.cloudmanager.connector.vcd.VcdCloudProviderConnector','VMware vCloud Director (version 5.1 or higher required)','vcloud'),(6,'org.ow2.sirocco.cloudmanager.connector.amazon.AmazonCloudProviderConnector','Amazon EC2','amazon');
+INSERT INTO `CLOUDPROVIDERPROFILE` VALUES (4,'org.ow2.sirocco.cloudmanager.connector.mock.MockCloudProviderConnector','Mock provider','mock'),(5,'org.ow2.sirocco.cloudmanager.connector.openstack.OpenStackCloudProviderConnector','OpenStack (Grizzly or higher version required)','openstack'),(6,'org.ow2.sirocco.cloudmanager.connector.vcd.VcdCloudProviderConnector','VMware vCloud Director (version 5.1 or higher required)','vcloud'),(7,'org.ow2.sirocco.cloudmanager.connector.amazon.AmazonCloudProviderConnector','Amazon EC2','amazon'),(8,'org.ow2.sirocco.cloudmanager.connector.cloudstack.CloudStackCloudProviderConnector','CloudStack','cloudstack');
 /*!40000 ALTER TABLE `CLOUDPROVIDERPROFILE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -762,7 +761,7 @@ CREATE TABLE `CloudProviderProfile_ACCOUNTPARAMETERS` (
 
 LOCK TABLES `CloudProviderProfile_ACCOUNTPARAMETERS` WRITE;
 /*!40000 ALTER TABLE `CloudProviderProfile_ACCOUNTPARAMETERS` DISABLE KEYS */;
-INSERT INTO `CloudProviderProfile_ACCOUNTPARAMETERS` VALUES ('endpoint','Keystone API endpoint','provider.endpoint',1,'String',4),('login','User name','account.username',1,'String',4),('password','Password','account.password',1,'String',4),('','Tenant name','tenantName',1,'String',4),('','Name of public network','publicNetworkName',1,'String',4),('endpoint','vCloud URL','provider.endpoint',1,'String',5),('login','User name','account.username',1,'String',5),('password','Password','account.password',1,'String',5),('','Name of the organization','orgName',1,'String',5),('','Name of a VDC','vdcName',1,'String',5),('','Name of public organization network','publicNetworkName',1,'String',5),('login','AWS Access Key ID','account.username',1,'String',6),('password','AWS Secret Key','account.password',1,'String',6);
+INSERT INTO `CloudProviderProfile_ACCOUNTPARAMETERS` VALUES ('endpoint','Keystone API endpoint','provider.endpoint',1,'String',5),('login','User name','account.username',1,'String',5),('password','Password','account.password',1,'String',5),('','Tenant name','tenantName',1,'String',5),('','Name of public network','publicNetworkName',1,'String',5),('endpoint','vCloud URL','provider.endpoint',1,'String',6),('login','User name','account.username',1,'String',6),('password','Password','account.password',1,'String',6),('','Name of the organization','orgName',1,'String',6),('','Name of a VDC','vdcName',1,'String',6),('','Name of public organization network','publicNetworkName',1,'String',6),('login','AWS Access Key ID','account.username',1,'String',7),('password','AWS Secret Key','account.password',1,'String',7),('login','API Key','account.username',1,'String',8),('password','Secret Key','account.password',1,'String',8);
 /*!40000 ALTER TABLE `CloudProviderProfile_ACCOUNTPARAMETERS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1410,13 +1409,19 @@ CREATE TABLE `MACHINE` (
   `MEMORY` int(11) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `CLOUDPROVIDERACCOUNT_ID` int(11) DEFAULT NULL,
+  `CONFIG_ID` int(11) DEFAULT NULL,
+  `IMAGE_ID` int(11) DEFAULT NULL,
   `LOCATION_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
+  KEY `FK_MACHINE_IMAGE_ID` (`IMAGE_ID`),
+  KEY `FK_MACHINE_CONFIG_ID` (`CONFIG_ID`),
   KEY `FK_MACHINE_CLOUDPROVIDERACCOUNT_ID` (`CLOUDPROVIDERACCOUNT_ID`),
   KEY `FK_MACHINE_LOCATION_ID` (`LOCATION_ID`),
   CONSTRAINT `FK_MACHINE_LOCATION_ID` FOREIGN KEY (`LOCATION_ID`) REFERENCES `CLOUDPROVIDERLOCATION` (`ID`),
   CONSTRAINT `FK_MACHINE_CLOUDPROVIDERACCOUNT_ID` FOREIGN KEY (`CLOUDPROVIDERACCOUNT_ID`) REFERENCES `CLOUDPROVIDERACCOUNT` (`ID`),
-  CONSTRAINT `FK_MACHINE_ID` FOREIGN KEY (`ID`) REFERENCES `CLOUDRESOURCE` (`ID`)
+  CONSTRAINT `FK_MACHINE_CONFIG_ID` FOREIGN KEY (`CONFIG_ID`) REFERENCES `MACHINECONFIGURATION` (`ID`),
+  CONSTRAINT `FK_MACHINE_ID` FOREIGN KEY (`ID`) REFERENCES `CLOUDRESOURCE` (`ID`),
+  CONSTRAINT `FK_MACHINE_IMAGE_ID` FOREIGN KEY (`IMAGE_ID`) REFERENCES `CLOUDRESOURCE` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1506,7 +1511,10 @@ DROP TABLE IF EXISTS `MACHINEIMAGE`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `MACHINEIMAGE` (
   `ID` int(11) NOT NULL,
+  `ARCHITECTURE` varchar(255) DEFAULT NULL,
+  `CAPACITY` int(11) DEFAULT NULL,
   `IMAGELOCATION` varchar(255) DEFAULT NULL,
+  `OSTYPE` varchar(255) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `TYPE` varchar(255) DEFAULT NULL,
   `VISIBILITY` varchar(255) DEFAULT NULL,
@@ -2814,7 +2822,9 @@ DROP TABLE IF EXISTS `SIROCCOCONFIGURATION`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `SIROCCOCONFIGURATION` (
   `ID` int(11) NOT NULL,
-  `MOCKCONNECTORIMPLEMENTSSYSTEM` tinyint(1) DEFAULT '0',
+  `HTTPNONPROXYHOSTS` varchar(255) DEFAULT NULL,
+  `HTTPPROXYHOST` varchar(255) DEFAULT NULL,
+  `HTTPPROXYPORT` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -2825,7 +2835,7 @@ CREATE TABLE `SIROCCOCONFIGURATION` (
 
 LOCK TABLES `SIROCCOCONFIGURATION` WRITE;
 /*!40000 ALTER TABLE `SIROCCOCONFIGURATION` DISABLE KEYS */;
-INSERT INTO `SIROCCOCONFIGURATION` VALUES (1,1);
+INSERT INTO `SIROCCOCONFIGURATION` VALUES (1,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `SIROCCOCONFIGURATION` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3115,7 +3125,7 @@ CREATE TABLE `TENANT` (
 
 LOCK TABLES `TENANT` WRITE;
 /*!40000 ALTER TABLE `TENANT` DISABLE KEYS */;
-INSERT INTO `TENANT` VALUES (1,NULL,NULL,'trial',NULL);
+INSERT INTO `TENANT` VALUES (2,NULL,NULL,'trial',NULL);
 /*!40000 ALTER TABLE `TENANT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3171,7 +3181,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (0,NULL,NULL,NULL,NULL,'21232f297a57a5a743894a0e4a801fc3','sirocco-admin','admin'),(2,NULL,NULL,NULL,NULL,'084e0343a0486ff05530df6c705c8bb4','sirocco-user','guest');
+INSERT INTO `Users` VALUES (0,NULL,NULL,NULL,NULL,'21232f297a57a5a743894a0e4a801fc3','sirocco-admin','admin'),(3,NULL,NULL,NULL,NULL,'084e0343a0486ff05530df6c705c8bb4','sirocco-user','guest');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3198,7 +3208,7 @@ CREATE TABLE `Users_TENANT` (
 
 LOCK TABLES `Users_TENANT` WRITE;
 /*!40000 ALTER TABLE `Users_TENANT` DISABLE KEYS */;
-INSERT INTO `Users_TENANT` VALUES (1,2);
+INSERT INTO `Users_TENANT` VALUES (2,3);
 /*!40000 ALTER TABLE `Users_TENANT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3454,4 +3464,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-10-22 19:58:21
+-- Dump completed on 2013-11-12 20:29:31
