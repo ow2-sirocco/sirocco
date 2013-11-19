@@ -61,6 +61,7 @@ CREATE TABLE `ADDRESS` (
   `PROTOCOL` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `NETWORK_ID` int(11) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `RESOURCE_ID` int(11) DEFAULT NULL,
@@ -104,6 +105,7 @@ CREATE TABLE `ADDRESSTEMPLATE` (
   `PROTOCOL` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `NETWORK_ID` int(11) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -261,6 +263,7 @@ CREATE TABLE `CLOUDCOLLECTIONITEM` (
   `NAME` varchar(255) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `cloudcoll_ent_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_CLOUDCOLLECTIONITEM_cloudcoll_ent_id` (`cloudcoll_ent_id`),
@@ -292,6 +295,7 @@ CREATE TABLE `CLOUDENTRYPOINT` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_CLOUDENTRYPOINT_TENANT_ID` (`TENANT_ID`),
@@ -322,6 +326,7 @@ CREATE TABLE `CLOUDPROVIDER` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `ENABLED` tinyint(1) DEFAULT '0',
   `ENDPOINT` varchar(255) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -332,7 +337,7 @@ CREATE TABLE `CLOUDPROVIDER` (
 
 LOCK TABLES `CLOUDPROVIDER` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDER` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDER` VALUES (9,'mock','2013-11-12 20:04:56','Mock cloud provider',1,'dummy'),(11,'amazon','2013-11-12 20:04:58','Amazon EC2 Service',1,'');
+INSERT INTO `CLOUDPROVIDER` VALUES (9,'mock','2013-11-19 11:15:46','Mock cloud provider',1,'dummy','d91f78f8-89db-4ae0-b403-cd245e11cc6f'),(11,'amazon','2013-11-19 11:15:48','Amazon EC2 Service',1,'','fef67412-3ce3-41e1-bf44-4141eba482a9');
 /*!40000 ALTER TABLE `CLOUDPROVIDER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -351,6 +356,7 @@ CREATE TABLE `CLOUDPROVIDERACCOUNT` (
   `LOGIN` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `PASSWORD` varchar(255) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `CLOUDPROVIDER_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_CLOUDPROVIDERACCOUNT_CLOUDPROVIDER_ID` (`CLOUDPROVIDER_ID`),
@@ -408,6 +414,7 @@ CREATE TABLE `CLOUDPROVIDERLOCATION` (
   `iso3166_2` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATENAME` varchar(255) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -418,7 +425,7 @@ CREATE TABLE `CLOUDPROVIDERLOCATION` (
 
 LOCK TABLES `CLOUDPROVIDERLOCATION` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERLOCATION` VALUES (10,NULL,'France','FR','FR-75',NULL,'Paris'),(12,NULL,'USA','US','US-CA',NULL,'California'),(13,NULL,'Ireland','IE',NULL,NULL,NULL),(14,NULL,'USA','US','US-VA',NULL,'Virginia'),(15,NULL,'Singapore','SG',NULL,NULL,NULL),(16,NULL,'Japan','JP','JP-13',NULL,'Tokyo'),(17,NULL,'Brazil','BR','BR-SP',NULL,'Sao Paulo'),(18,NULL,'Australia','AU','AU-NSW',NULL,'Sydney'),(19,NULL,'USA','US','US-OR',NULL,'Oregon');
+INSERT INTO `CLOUDPROVIDERLOCATION` VALUES (10,NULL,'France','FR','FR-75',NULL,'Paris','448420db-9f8b-452c-98bd-89cd8bc58c16'),(12,NULL,'USA','US','US-CA',NULL,'California','2dbee581-1780-48ac-b8a3-e191121d62df'),(13,NULL,'Ireland','IE',NULL,NULL,NULL,'0b55a009-44ad-424a-b02a-27963833b96b'),(14,NULL,'USA','US','US-VA',NULL,'Virginia','778604ca-ef86-42d3-8356-da72d1e481fb'),(15,NULL,'Singapore','SG',NULL,NULL,NULL,'0109ab4a-e237-434f-b295-f55c563beec0'),(16,NULL,'Japan','JP','JP-13',NULL,'Tokyo','afd87b05-f65b-494f-bc69-4bc9be397150'),(17,NULL,'Brazil','BR','BR-SP',NULL,'Sao Paulo','5ec37b3b-4794-44fb-8a01-9c3c9768dec4'),(18,NULL,'Australia','AU','AU-NSW',NULL,'Sydney','8ba38cf7-ab63-476d-b0f3-847eccf5230d'),(19,NULL,'USA','US','US-OR',NULL,'Oregon','122a9dc0-c044-4d85-9300-0afd37d245c5');
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,6 +468,7 @@ CREATE TABLE `CLOUDPROVIDERPROFILE` (
   `CONNECTORCLASS` varchar(255) DEFAULT NULL,
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `TYPE` varchar(255) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -471,7 +479,7 @@ CREATE TABLE `CLOUDPROVIDERPROFILE` (
 
 LOCK TABLES `CLOUDPROVIDERPROFILE` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERPROFILE` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERPROFILE` VALUES (4,'org.ow2.sirocco.cloudmanager.connector.mock.MockCloudProviderConnector','Mock provider','mock'),(5,'org.ow2.sirocco.cloudmanager.connector.openstack.OpenStackCloudProviderConnector','OpenStack (Grizzly or higher version required)','openstack'),(6,'org.ow2.sirocco.cloudmanager.connector.vcd.VcdCloudProviderConnector','VMware vCloud Director (version 5.1 or higher required)','vcloud'),(7,'org.ow2.sirocco.cloudmanager.connector.amazon.AmazonCloudProviderConnector','Amazon EC2','amazon'),(8,'org.ow2.sirocco.cloudmanager.connector.cloudstack.CloudStackCloudProviderConnector','CloudStack','cloudstack');
+INSERT INTO `CLOUDPROVIDERPROFILE` VALUES (4,'org.ow2.sirocco.cloudmanager.connector.mock.MockCloudProviderConnector','Mock provider','mock','323190ad-68b3-4a66-a6a8-476adea999bc'),(5,'org.ow2.sirocco.cloudmanager.connector.openstack.OpenStackCloudProviderConnector','OpenStack (Grizzly or higher version required)','openstack','c3d1b560-cb2f-4988-81ae-b66421e20eb4'),(6,'org.ow2.sirocco.cloudmanager.connector.vcd.VcdCloudProviderConnector','VMware vCloud Director (version 5.1 or higher required)','vcloud','0c2bd94d-27c8-4648-ac04-fd613e6b5f37'),(7,'org.ow2.sirocco.cloudmanager.connector.amazon.AmazonCloudProviderConnector','Amazon EC2','amazon','391ebbd5-0526-40cf-ae41-a76252066ab2'),(8,'org.ow2.sirocco.cloudmanager.connector.cloudstack.CloudStackCloudProviderConnector','CloudStack','cloudstack','041ae470-d104-4bd6-b408-931276851e12');
 /*!40000 ALTER TABLE `CLOUDPROVIDERPROFILE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -491,6 +499,7 @@ CREATE TABLE `CLOUDRESOURCE` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_CLOUDRESOURCE_TENANT_ID` (`TENANT_ID`),
@@ -524,6 +533,7 @@ CREATE TABLE `CLOUDTEMPLATE` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `VISIBILITY` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -558,6 +568,7 @@ CREATE TABLE `COMPONENTDESCRIPTOR` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `comp_desc_id` int(11) DEFAULT NULL,
   `system_temp_id` int(11) DEFAULT NULL,
@@ -595,8 +606,13 @@ CREATE TABLE `CONSTRAINTGROUP` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `OPERATOR` varchar(255) DEFAULT NULL,
+  `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
-  PRIMARY KEY (`ID`)
+  `UUID` varchar(255) DEFAULT NULL,
+  `TENANT_ID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `FK_CONSTRAINTGROUP_TENANT_ID` (`TENANT_ID`),
+  CONSTRAINT `FK_CONSTRAINTGROUP_TENANT_ID` FOREIGN KEY (`TENANT_ID`) REFERENCES `TENANT` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -761,7 +777,7 @@ CREATE TABLE `CloudProviderProfile_ACCOUNTPARAMETERS` (
 
 LOCK TABLES `CloudProviderProfile_ACCOUNTPARAMETERS` WRITE;
 /*!40000 ALTER TABLE `CloudProviderProfile_ACCOUNTPARAMETERS` DISABLE KEYS */;
-INSERT INTO `CloudProviderProfile_ACCOUNTPARAMETERS` VALUES ('endpoint','Keystone API endpoint','provider.endpoint',1,'String',5),('login','User name','account.username',1,'String',5),('password','Password','account.password',1,'String',5),('','Tenant name','tenantName',1,'String',5),('','Name of public network','publicNetworkName',1,'String',5),('endpoint','vCloud URL','provider.endpoint',1,'String',6),('login','User name','account.username',1,'String',6),('password','Password','account.password',1,'String',6),('','Name of the organization','orgName',1,'String',6),('','Name of a VDC','vdcName',1,'String',6),('','Name of public organization network','publicNetworkName',1,'String',6),('login','AWS Access Key ID','account.username',1,'String',7),('password','AWS Secret Key','account.password',1,'String',7),('login','API Key','account.username',1,'String',8),('password','Secret Key','account.password',1,'String',8);
+INSERT INTO `CloudProviderProfile_ACCOUNTPARAMETERS` VALUES ('endpoint','Keystone API endpoint','provider.endpoint',1,'String',5),('login','User name','account.username',1,'String',5),('password','Password','account.password',1,'String',5),('','Tenant name','tenantName',1,'String',5),('','Name of public network','publicNetworkName',1,'String',5),('endpoint','vCloud URL','provider.endpoint',1,'String',6),('login','User name','account.username',1,'String',6),('password','Password','account.password',1,'String',6),('','Name of the organization','orgName',1,'String',6),('','Name of a VDC','vdcName',1,'String',6),('','Name of public organization network','publicNetworkName',1,'String',6),('login','AWS Access Key ID','account.username',1,'String',7),('password','AWS Secret Key','account.password',1,'String',7),('endpoint','API endpoint','provider.endpoint',1,'String',8),('login','API Key','account.username',1,'String',8),('password','Secret Key','account.password',1,'String',8);
 /*!40000 ALTER TABLE `CloudProviderProfile_ACCOUNTPARAMETERS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -910,6 +926,7 @@ CREATE TABLE `EVENT` (
   `TIMESTAMP` datetime DEFAULT NULL,
   `TYPE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `CONTENT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -945,6 +962,7 @@ CREATE TABLE `EVENTLOG` (
   `PERSISTENCE` int(11) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `CRITICAL` int(11) DEFAULT NULL,
   `HIGH` int(11) DEFAULT NULL,
   `LOW` int(11) DEFAULT NULL,
@@ -1146,6 +1164,7 @@ CREATE TABLE `FORWARDINGGROUPNETWORK` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `NETWORK_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -1180,6 +1199,7 @@ CREATE TABLE `FORWARDINGGROUPTEMPLATE` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_FORWARDINGGROUPTEMPLATE_TENANT_ID` (`TENANT_ID`),
@@ -1320,7 +1340,7 @@ CREATE TABLE `JOB` (
   `STATUSMESSAGE` varchar(255) DEFAULT NULL,
   `TIMEOFSTATUSCHANGE` datetime DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
-  `LOCATION_ID` int(11) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `PARENTJOB_ID` int(11) DEFAULT NULL,
   `TARGETRESOURCE_ID` int(11) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
@@ -1328,8 +1348,6 @@ CREATE TABLE `JOB` (
   KEY `FK_JOB_TENANT_ID` (`TENANT_ID`),
   KEY `FK_JOB_TARGETRESOURCE_ID` (`TARGETRESOURCE_ID`),
   KEY `FK_JOB_PARENTJOB_ID` (`PARENTJOB_ID`),
-  KEY `FK_JOB_LOCATION_ID` (`LOCATION_ID`),
-  CONSTRAINT `FK_JOB_LOCATION_ID` FOREIGN KEY (`LOCATION_ID`) REFERENCES `CLOUDPROVIDERLOCATION` (`ID`),
   CONSTRAINT `FK_JOB_PARENTJOB_ID` FOREIGN KEY (`PARENTJOB_ID`) REFERENCES `JOB` (`ID`),
   CONSTRAINT `FK_JOB_TARGETRESOURCE_ID` FOREIGN KEY (`TARGETRESOURCE_ID`) REFERENCES `CLOUDRESOURCE` (`ID`),
   CONSTRAINT `FK_JOB_TENANT_ID` FOREIGN KEY (`TENANT_ID`) REFERENCES `TENANT` (`ID`)
@@ -1451,6 +1469,7 @@ CREATE TABLE `MACHINECONFIGURATION` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `VISIBILITY` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -1486,6 +1505,7 @@ CREATE TABLE `MACHINEDISK` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_MACHINEDISK_TENANT_ID` (`TENANT_ID`),
@@ -1593,6 +1613,7 @@ CREATE TABLE `MACHINENETWORKINTERFACEADDRESS` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATE` int(11) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `ADDRESS_ID` int(11) DEFAULT NULL,
   `machinenetworkinterface_id` int(11) DEFAULT NULL,
@@ -1672,6 +1693,7 @@ CREATE TABLE `MACHINETEMPLATENETWORKINTERFACE` (
   `STATE` varchar(255) DEFAULT NULL,
   `SYSTEMNETWORKNAME` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `NETWORK_ID` int(11) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `NETWORKPORT_ID` int(11) DEFAULT NULL,
@@ -1817,6 +1839,7 @@ DROP TABLE IF EXISTS `MACHINEVOLUMETEMPLATE`;
 CREATE TABLE `MACHINEVOLUMETEMPLATE` (
   `ID` int(11) NOT NULL,
   `INITIALLOCATION` varchar(255) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `VOLUMETEMPLATE_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_MACHINEVOLUMETEMPLATE_VOLUMETEMPLATE_ID` (`VOLUMETEMPLATE_ID`),
@@ -1883,6 +1906,7 @@ CREATE TABLE `METER` (
   `TIMESCOPE` varchar(255) DEFAULT NULL,
   `UNITS` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TARGETRESOURCE_ID` int(11) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -1923,6 +1947,7 @@ CREATE TABLE `METERCONFIGURATION` (
   `TIMESCOPE` varchar(255) DEFAULT NULL,
   `UNITS` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_METERCONFIGURATION_TENANT_ID` (`TENANT_ID`),
@@ -1955,6 +1980,7 @@ CREATE TABLE `METERSAMPLE` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `TIMESTAMP` datetime DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `VALUE` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -1987,6 +2013,7 @@ CREATE TABLE `METERTEMPLATE` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `METERCONFIGURATION_ID` int(11) DEFAULT NULL,
   `TARGETRESOURCE_ID` int(11) DEFAULT NULL,
@@ -2415,6 +2442,7 @@ CREATE TABLE `NETWORKCONFIGURATION` (
   `NETWORKTYPE` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `VISIBILITY` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -2448,6 +2476,7 @@ CREATE TABLE `NETWORKNETWORKPORT` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `NETWORKPORT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -2519,6 +2548,7 @@ CREATE TABLE `NETWORKPORTCONFIGURATION` (
   `PORTTYPE` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `FK_NETWORKPORTCONFIGURATION_TENANT_ID` (`TENANT_ID`),
@@ -2550,6 +2580,7 @@ CREATE TABLE `NETWORKPORTTEMPLATE` (
   `NAME` varchar(255) DEFAULT NULL,
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `NETWORK_ID` int(11) DEFAULT NULL,
   `NETWORKPORTCONFIG_ID` int(11) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
@@ -3115,6 +3146,7 @@ CREATE TABLE `TENANT` (
   `DESCRIPTION` varchar(255) DEFAULT NULL,
   `NAME` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -3125,7 +3157,7 @@ CREATE TABLE `TENANT` (
 
 LOCK TABLES `TENANT` WRITE;
 /*!40000 ALTER TABLE `TENANT` DISABLE KEYS */;
-INSERT INTO `TENANT` VALUES (2,NULL,NULL,'trial',NULL);
+INSERT INTO `TENANT` VALUES (2,NULL,NULL,'trial',NULL,'b0d4a777-339f-47ef-a471-6274ed293589');
 /*!40000 ALTER TABLE `TENANT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3170,6 +3202,7 @@ CREATE TABLE `Users` (
   `PASSWORD` varchar(255) DEFAULT NULL,
   `ROLE` varchar(255) DEFAULT NULL,
   `USERNAME` varchar(255) DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `USERNAME` (`USERNAME`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -3181,7 +3214,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (0,NULL,NULL,NULL,NULL,'21232f297a57a5a743894a0e4a801fc3','sirocco-admin','admin'),(3,NULL,NULL,NULL,NULL,'084e0343a0486ff05530df6c705c8bb4','sirocco-user','guest');
+INSERT INTO `Users` VALUES (0,NULL,NULL,NULL,NULL,'21232f297a57a5a743894a0e4a801fc3','sirocco-admin','admin',NULL),(3,NULL,NULL,NULL,NULL,'084e0343a0486ff05530df6c705c8bb4','sirocco-user','guest','255a4f79-c73d-4af9-8258-ef3e09af5dfe');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3263,6 +3296,7 @@ CREATE TABLE `VOLUMECONFIGURATION` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `TYPE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `VISIBILITY` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -3360,6 +3394,7 @@ CREATE TABLE `VOLUMEVOLUMEIMAGE` (
   `PROVIDERASSIGNEDID` varchar(255) DEFAULT NULL,
   `STATE` varchar(255) DEFAULT NULL,
   `UPDATED` datetime DEFAULT NULL,
+  `UUID` varchar(255) DEFAULT NULL,
   `TENANT_ID` int(11) DEFAULT NULL,
   `VOLUMEIMAGE_ID` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`),
@@ -3464,4 +3499,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-12 20:29:31
+-- Dump completed on 2013-11-19 11:16:00
