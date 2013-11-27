@@ -337,7 +337,7 @@ CREATE TABLE `CLOUDPROVIDER` (
 
 LOCK TABLES `CLOUDPROVIDER` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDER` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDER` VALUES (9,'mock','2013-11-19 11:15:46','Mock cloud provider',1,'dummy','d91f78f8-89db-4ae0-b403-cd245e11cc6f'),(11,'amazon','2013-11-19 11:15:48','Amazon EC2 Service',1,'','fef67412-3ce3-41e1-bf44-4141eba482a9');
+INSERT INTO `CLOUDPROVIDER` VALUES (9,'mock','2013-11-27 14:33:00','Mock cloud provider',1,'dummy','000c7716-04ec-4ee9-a49d-11455ce20273'),(11,'amazon','2013-11-27 14:33:02','Amazon EC2 Service',1,'','fd6ff7cf-a6cd-44bb-9549-8253f14bbac7');
 /*!40000 ALTER TABLE `CLOUDPROVIDER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -425,7 +425,7 @@ CREATE TABLE `CLOUDPROVIDERLOCATION` (
 
 LOCK TABLES `CLOUDPROVIDERLOCATION` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERLOCATION` VALUES (10,NULL,'France','FR','FR-75',NULL,'Paris','448420db-9f8b-452c-98bd-89cd8bc58c16'),(12,NULL,'USA','US','US-CA',NULL,'California','2dbee581-1780-48ac-b8a3-e191121d62df'),(13,NULL,'Ireland','IE',NULL,NULL,NULL,'0b55a009-44ad-424a-b02a-27963833b96b'),(14,NULL,'USA','US','US-VA',NULL,'Virginia','778604ca-ef86-42d3-8356-da72d1e481fb'),(15,NULL,'Singapore','SG',NULL,NULL,NULL,'0109ab4a-e237-434f-b295-f55c563beec0'),(16,NULL,'Japan','JP','JP-13',NULL,'Tokyo','afd87b05-f65b-494f-bc69-4bc9be397150'),(17,NULL,'Brazil','BR','BR-SP',NULL,'Sao Paulo','5ec37b3b-4794-44fb-8a01-9c3c9768dec4'),(18,NULL,'Australia','AU','AU-NSW',NULL,'Sydney','8ba38cf7-ab63-476d-b0f3-847eccf5230d'),(19,NULL,'USA','US','US-OR',NULL,'Oregon','122a9dc0-c044-4d85-9300-0afd37d245c5');
+INSERT INTO `CLOUDPROVIDERLOCATION` VALUES (10,NULL,'France','FR','FR-75',NULL,'Paris','c2377355-3c62-4e79-9248-57905adf6544'),(12,NULL,'USA','US','US-CA',NULL,'California','e157a750-c3f7-4bdf-b8c7-43174eca252e'),(13,NULL,'Ireland','IE',NULL,NULL,NULL,'2d2eae4a-a779-47af-a6ae-95bd3348a8ec'),(14,NULL,'USA','US','US-VA',NULL,'Virginia','657d28ab-e478-4498-8e87-5c6224314112'),(15,NULL,'Singapore','SG',NULL,NULL,NULL,'6698e082-dfa6-4c26-a446-d90dc367c955'),(16,NULL,'Japan','JP','JP-13',NULL,'Tokyo','b57e71eb-e1d8-47e1-9b8a-cda7fce7d003'),(17,NULL,'Brazil','BR','BR-SP',NULL,'Sao Paulo','8346221c-21c9-425d-a3da-1ece5a3dafc3'),(18,NULL,'Australia','AU','AU-NSW',NULL,'Sydney','ff68ac04-c005-4113-873a-414e45363b4e'),(19,NULL,'USA','US','US-OR',NULL,'Oregon','1206501a-b493-4151-b64c-11fdcbe2befc');
 /*!40000 ALTER TABLE `CLOUDPROVIDERLOCATION` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -479,7 +479,7 @@ CREATE TABLE `CLOUDPROVIDERPROFILE` (
 
 LOCK TABLES `CLOUDPROVIDERPROFILE` WRITE;
 /*!40000 ALTER TABLE `CLOUDPROVIDERPROFILE` DISABLE KEYS */;
-INSERT INTO `CLOUDPROVIDERPROFILE` VALUES (4,'org.ow2.sirocco.cloudmanager.connector.mock.MockCloudProviderConnector','Mock provider','mock','323190ad-68b3-4a66-a6a8-476adea999bc'),(5,'org.ow2.sirocco.cloudmanager.connector.openstack.OpenStackCloudProviderConnector','OpenStack (Grizzly or higher version required)','openstack','c3d1b560-cb2f-4988-81ae-b66421e20eb4'),(6,'org.ow2.sirocco.cloudmanager.connector.vcd.VcdCloudProviderConnector','VMware vCloud Director (version 5.1 or higher required)','vcloud','0c2bd94d-27c8-4648-ac04-fd613e6b5f37'),(7,'org.ow2.sirocco.cloudmanager.connector.amazon.AmazonCloudProviderConnector','Amazon EC2','amazon','391ebbd5-0526-40cf-ae41-a76252066ab2'),(8,'org.ow2.sirocco.cloudmanager.connector.cloudstack.CloudStackCloudProviderConnector','CloudStack','cloudstack','041ae470-d104-4bd6-b408-931276851e12');
+INSERT INTO `CLOUDPROVIDERPROFILE` VALUES (4,'org.ow2.sirocco.cloudmanager.connector.mock.MockCloudProviderConnector','Mock provider','mock','3f806b45-0d43-44bf-8d82-fcbd834ac8d2'),(5,'org.ow2.sirocco.cloudmanager.connector.openstack.OpenStackCloudProviderConnector','OpenStack (Grizzly or higher version required)','openstack','819dcb60-b70e-452d-8152-e5765ad981e8'),(6,'org.ow2.sirocco.cloudmanager.connector.vcd.VcdCloudProviderConnector','VMware vCloud Director (version 5.1 or higher required)','vcloud','c24879ec-3816-47c8-89fd-d8544060ee7d'),(7,'org.ow2.sirocco.cloudmanager.connector.amazon.AmazonCloudProviderConnector','Amazon EC2','amazon','7e9ef092-53e5-4240-b30d-2e31d63d98c0'),(8,'org.ow2.sirocco.cloudmanager.connector.cloudstack.CloudStackCloudProviderConnector','CloudStack','cloudstack','f9c0b3b3-f430-4c90-b47c-829215df08a2');
 /*!40000 ALTER TABLE `CLOUDPROVIDERPROFILE` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3157,7 +3157,7 @@ CREATE TABLE `TENANT` (
 
 LOCK TABLES `TENANT` WRITE;
 /*!40000 ALTER TABLE `TENANT` DISABLE KEYS */;
-INSERT INTO `TENANT` VALUES (2,NULL,NULL,'trial',NULL,'b0d4a777-339f-47ef-a471-6274ed293589');
+INSERT INTO `TENANT` VALUES (2,NULL,NULL,'trial',NULL,'51a64e4c-db5d-41cf-884e-ea54f02c444a');
 /*!40000 ALTER TABLE `TENANT` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3214,7 +3214,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (0,NULL,NULL,NULL,NULL,'21232f297a57a5a743894a0e4a801fc3','sirocco-admin','admin',NULL),(3,NULL,NULL,NULL,NULL,'084e0343a0486ff05530df6c705c8bb4','sirocco-user','guest','255a4f79-c73d-4af9-8258-ef3e09af5dfe');
+INSERT INTO `Users` VALUES (0,NULL,NULL,NULL,NULL,'21232f297a57a5a743894a0e4a801fc3','sirocco-admin','admin',NULL),(3,NULL,NULL,NULL,NULL,'084e0343a0486ff05530df6c705c8bb4','sirocco-user','guest','8b4cd355-e81d-4bb9-b98f-6d7d3d621476');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -3499,4 +3499,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-11-19 11:16:00
+-- Dump completed on 2013-11-27 14:33:26
