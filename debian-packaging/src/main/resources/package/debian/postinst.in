@@ -84,7 +84,7 @@ if [ "${1}" = "configure" ] || [ "${1}" = "reconfigure" ] ; then
       fi
 
       asadmin start-domain sirocco
-      asadmin deploy /usr/share/sirocco-server/lib/sirocco-${cloudmanager.version}.ear
+      asadmin deploy /usr/share/sirocco-server/lib/sirocco-${project.version}.ear
     fi
   fi
 
