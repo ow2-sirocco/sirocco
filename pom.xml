@@ -56,6 +56,7 @@
 		<module>dashboard-web-module</module>
 		<module>cloudmanager-business-module</module>
 		<module>sirocco-ear</module>
+    <module>sirocco-api-openstack</module>
 	</modules>
 	
 	<profiles>
