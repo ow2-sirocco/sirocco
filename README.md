@@ -7,6 +7,10 @@ To clone this repository, execute:
     git clone --recursive git@github.com:ow2-sirocco/sirocco.git
     git submodule update --remote
 
+If you need to get updates from submodules
+
+    git submodule foreach git pull origin master
+
 (prerequisite: a GitHub account with a SSH key)
 
 Sirocco repository structure:
