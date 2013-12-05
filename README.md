@@ -29,7 +29,7 @@ Sirocco repository structure:
 
 Prerequisite:   
 
-* maven
+* maven 3
 * Java JDK 7
 
 To build the source, execute:
