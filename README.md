@@ -108,7 +108,7 @@ To create the Sirocco database accessible by user "sirocco" with password "siroc
 
 Initialize the database by executing:
 
-    mysql -usirocco -psirocco < etc/db/sirocco_mock_db.sql
+    mysql -usirocco -psirocco sirocco < etc/db/sirocco_db.sql
 
 This will create a minimal configuration:
 
