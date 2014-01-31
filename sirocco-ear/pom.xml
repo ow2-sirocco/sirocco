@@ -65,7 +65,7 @@
 
 		<dependency>
 			<groupId>org.ow2.sirocco.cloudmanager</groupId>
-			<artifactId>sirocco-cloudmanager-connector-openstack-nova</artifactId>
+			<artifactId>sirocco-cloudmanager-connector-openstack</artifactId>
 			<version>${cloudmanager.version}</version>
 			<type>jar</type>
 			<exclusions>
@@ -183,7 +183,7 @@
 						</jarModule>
 						<jarModule>
 							<groupId>org.ow2.sirocco.cloudmanager</groupId>
-							<artifactId>sirocco-cloudmanager-connector-openstack-nova</artifactId>
+							<artifactId>sirocco-cloudmanager-connector-openstack</artifactId>
 						</jarModule>
 						<jarModule>
 							<groupId>org.ow2.sirocco.cloudmanager</groupId>
