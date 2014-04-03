@@ -1,20 +1,25 @@
 [submodule "openstack-java-sdk"]
 	path = openstack-java-sdk
 	url = git@github.com:ow2-sirocco/openstack-java-sdk.git
+	update = rebase
 	branch = sirocco
 [submodule "cimi-web-module"]
 	path = cimi-web-module
 	url = git@github.com:ow2-sirocco/sirocco-cimi-api-server.git
+	update = rebase
 	branch = master
 [submodule "cloudmanager-business-module"]
 	path = cloudmanager-business-module
 	url = git@github.com:ow2-sirocco/sirocco-cloudmanager.git
+	update = rebase
 	branch = master
 [submodule "dashboard-web-module"]
 	path = dashboard-web-module
 	url = git@github.com:ow2-sirocco/sirocco-web-dashboard.git
+	update = rebase
 	branch = master
 [submodule "cimi-client"]
 	path = cimi-client
 	url = git@github.com:ow2-sirocco/sirocco-cimi-client.git
+	update = rebase
 	branch = master
