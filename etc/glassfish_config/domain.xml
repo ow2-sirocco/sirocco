@@ -65,11 +65,11 @@
     <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Queue" jndi-name="jms/JobEmission">
       <property name="Name" value="jms_JobEmission"></property>
     </admin-object-resource>
-    <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" resource-adapter-name="jmsra" connection-definition-name="javax.jms.ConnectionFactory"></connector-connection-pool>
+    <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/__defaultConnectionFactory-Connection-Pool" resource-adapter-name="jmsra" connection-definition-name="javax.jms.ConnectionFactory" transaction-support="NoTransaction"></connector-connection-pool>
     <connector-resource pool-name="jms/__defaultConnectionFactory-Connection-Pool" jndi-name="jms/__defaultConnectionFactory" object-type="system-all-req"></connector-resource>
     <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/QueueConnectionFactory" resource-adapter-name="jmsra" connection-definition-name="javax.jms.QueueConnectionFactory"></connector-connection-pool>
     <connector-resource pool-name="jms/QueueConnectionFactory" jndi-name="jms/QueueConnectionFactory"></connector-resource>
-    <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/TopicConnectionFactory" resource-adapter-name="jmsra" connection-definition-name="javax.jms.TopicConnectionFactory"></connector-connection-pool>
+    <connector-connection-pool max-pool-size="250" steady-pool-size="1" name="jms/TopicConnectionFactory" resource-adapter-name="jmsra" connection-definition-name="javax.jms.TopicConnectionFactory" transaction-support="NoTransaction"></connector-connection-pool>
     <connector-resource pool-name="jms/TopicConnectionFactory" jndi-name="jms/TopicConnectionFactory"></connector-resource>
     <admin-object-resource res-adapter="jmsra" res-type="javax.jms.Topic" jndi-name="jms/ResourceStateChangeTopic">
       <property name="Name" value="PhysicalResourceStateChangeTopic"></property>
