@@ -22,6 +22,7 @@ Sirocco repository structure:
     +---dashboard-web-module          - submodule, Web Portal (git@github.com:ow2-sirocco/sirocco-web-dashboard.git)
     +---cimi-client                   - submodule, CIMI Java SDK and command-line tools (git@github.com:ow2-sirocco/sirocco-cimi-client.git)
     +---openstack-java-sdk            - submodule, Fork of Woorea OpenStack Java SDK  (git@github.com:ow2-sirocco/openstack-java-sdk.git)
+    +---sirocco-api-openstack         - submodule, OpenStack compliant API to access to Sirocco managed resources
     \---sirocco-ear                   - maven module in charge of generating the Sirocco application archive ready to be deployed on a JavaEE Container
 
 

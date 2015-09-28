@@ -23,3 +23,6 @@
 	url = git@github.com:ow2-sirocco/sirocco-cimi-client.git
 	update = rebase
 	branch = master
+[submodule "sirocco-api-openstack"]
+	path = sirocco-api-openstack
+	url = git@github.com:ow2-sirocco/sirocco-api-openstack.git

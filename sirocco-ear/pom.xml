@@ -13,6 +13,10 @@
 	<artifactId>sirocco</artifactId>
 	<packaging>ear</packaging>
 	<name>SIROCCO :: CloudManager :: EAR</name>
+  
+  <properties>
+    <openstack.api.version>1.0-SNAPSHOT</openstack.api.version>
+  </properties>
 
 
 	<dependencies>
@@ -55,7 +59,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+      
 		<dependency>
 			<groupId>org.ow2.sirocco.cloudmanager</groupId>
 			<artifactId>sirocco-cloudmanager-connector-mock</artifactId>
@@ -114,6 +118,13 @@
 			<version>${cimi.server.version}</version>
 			<type>war</type>
 		</dependency>
+    
+    <dependency>
+      <groupId>org.ow2.sirocco.cloudmanager</groupId>
+      <artifactId>sirocco-api-openstack-webapp</artifactId>
+      <version>${openstack.api.version}</version>
+      <type>war</type>
+    </dependency>
 
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
@@ -207,6 +218,11 @@
 							<artifactId>sirocco-cimi-api-server-webapp</artifactId>
 							<context-root>/cimi</context-root>
 						</webModule>
+            <webModule>
+              <groupId>org.ow2.sirocco.cloudmanager</groupId>
+              <artifactId>sirocco-api-openstack-webapp</artifactId>
+              <context-root>/openstack</context-root>
+            </webModule>
 						
 					</modules>
 					<archive>
